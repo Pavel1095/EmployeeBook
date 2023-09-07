@@ -21,12 +21,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee addEmployee(String firstName, String lastName) {
+    public Employee addEmployee(String firstName, String lastName, int department, double salary) {
 
         if (employees.size() == EMPLOYEE_SIZE)
             throw new EmployeeStorageIsFullException();
 
-        Employee employee = new Employee(firstName, lastName);
+        Employee employee = new Employee(firstName, lastName, department, salary);
 
         if(employees.contains(employee)) {
             throw new EmployeeAlreadyAddedException();
@@ -39,7 +39,17 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee remoteEmployee(String firstName, String lastName) {
-        Employee employee = new Employee(firstName, lastName);
+        return null;
+    }
+
+    @Override
+    public Employee getEmployee(String firstName, String lastName) {
+        return null;
+    }
+
+    @Override
+    public Employee remoteEmployee(String firstName, String lastName, int department, double salary) {
+        Employee employee = new Employee(firstName, lastName, department, salary);
         if (!employees.remove(employee)) {
             throw new EmployeeNotFoundException();
         }
@@ -47,8 +57,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee getEmployee(String firstName, String lastName) {
-        Employee employee = new Employee(firstName, lastName);
+    public Employee getEmployee(String firstName, String lastName, int department, double salary) {
+        Employee employee = new Employee(firstName, lastName, department, salary);
         if (!employees.contains(employee)){
             throw new EmployeeNotFoundException();
         }
@@ -56,7 +66,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Collection<Employee> findAll(){
+    public List<Employee> findAll(){
         return employees;
     }
 }
